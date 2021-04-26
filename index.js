@@ -7,11 +7,6 @@ let matches = [];
 let pendingQueues = [];
 let matchID = 1000;
 
-/*player = {
-  "player" = p,
-  "team" = 0
-};*/
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
