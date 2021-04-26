@@ -1,1 +1,5 @@
 .env
+.gitattributes
+**node_modules
+packege.json
+package-lock.json
