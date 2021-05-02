@@ -1,4 +1,7 @@
 // Setup and imports
+const fs = require('fs');
+const express = require('express');
+const app = express();
 const Queue = require('./queue.js');
 const Match = require('./match.js');
 const Modality = require('./modality.js')
@@ -21,6 +24,32 @@ let rl3 = new Modality(6);
 let bh1 = new Modality(2);
 let bh2 = new Modality(4);
 
+// Leaderboard web server
+app.get('/', function (req, res) {
+  if (req.query.m) {
+    console.log(req.query.m);
+    let mod = req.query.m;
+    res.sendFile(__dirname + '/' + mod + '.html');
+  }
+});
+
+app.get('/leaderboard-rl-1v1.json', function (req, res) {
+  res.sendFile(__dirname + '/leaderboard-rl-1v1.json');
+})
+app.get('/leaderboard-rl-2v2.json', function (req, res) {
+  res.sendFile(__dirname + '/leaderboard-rl-2v2.json');
+})
+app.get('/leaderboard-rl-3v3.json', function (req, res) {
+  res.sendFile(__dirname + '/leaderboard-rl-3v3.json');
+})
+app.get('/leaderboard-bh-1v1.json', function (req, res) {
+  res.sendFile(__dirname + '/leaderboard-bh-1v1.json');
+})
+app.get('/leaderboard-bh-2v2.json', function (req, res) {
+  res.sendFile(__dirname + '/leaderboard-bh-2v2.json');
+})
+
+// Bot callbacks
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}.`);
 });
@@ -41,10 +70,15 @@ bot.on('message', msg => {
           break;
 
         case '.clear':
-          rl1.clear(msg);
+          if (msg.member.hasPermission('BAN_MEMBERS')) {
+            rl1.clear(msg);
+          }
           break;
 
         case '.leaderboard':
+          msg.channel.send({embed: {
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+          }});
           break;
 
         default:
@@ -52,7 +86,9 @@ bot.on('message', msg => {
             rl1.report(msg);
           }
           if (msg.content.startsWith('.cancel')) {
-            rl1.cancel(msg);
+            if (msg.member.hasPermission('BAN_MEMBERS')) {
+              rl1.cancel(msg);
+            }
           }
       }
       break;
@@ -79,6 +115,9 @@ bot.on('message', msg => {
           break;
 
         case '.leaderboard':
+          msg.channel.send({embed: {
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+          }});
           break;
 
         default:
@@ -113,6 +152,9 @@ bot.on('message', msg => {
           break;
 
         case '.leaderboard':
+          msg.channel.send({embed: {
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+          }});
           break;
 
         default:
@@ -141,6 +183,9 @@ bot.on('message', msg => {
           break;
 
         case '.leaderboard':
+          msg.channel.send({embed: {
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+          }});
           break;
 
         default:
@@ -175,6 +220,9 @@ bot.on('message', msg => {
           break;
 
         case '.leaderboard':
+          msg.channel.send({embed: {
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+          }});
           break;
 
         default:
@@ -192,4 +240,6 @@ bot.on('message', msg => {
 
 });
 
+// Starting bot and web server
 bot.login(TOKEN);
+app.listen(3000);

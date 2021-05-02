@@ -91,28 +91,56 @@ class Match {
   }
 
   report(result, player) {
-    let check = 0;
+    let score = {
+      check: 0,
+      team1: undefined,
+      team2: undefined
+    }
     this.team1.forEach(e => {
       if (e.id == player.id) {
-        if (result == 'win') {
-          check = 1;
+        score.check = 1;
+        if (result.startsWith('2')) {
+          score.team1 = 2;
+          if (result.endsWith('1')) {
+            score.team2 = 1;
+          }
+          if (result.endsWith('0')) {
+            score.team2 = 0;
+          }
         }
-        if (result == 'loss') {
-          check = 2;
+        if (result.startsWith('1')) {
+          score.team1 = 1;
+          score.team2 = 2;
+        }
+        if (result.startsWith('0')) {
+          score.team1 = 0;
+          score.team2 = 2;
         }
       }
     });
     this.team2.forEach(e => {
       if (e.id == player.id) {
-        if (result == 'win') {
-          check = 2;
+        score.check = 2;
+        if (result.startsWith('2')) {
+          score.team2 = 2;
+          if (result.endsWith('1')) {
+            score.team1 = 1;
+          }
+          if (result.endsWith('0')) {
+            score.team1 = 0;
+          }
         }
-        if (result == 'loss') {
-          check = 1;
+        if (result.startsWith('1')) {
+          score.team2 = 1;
+          score.team1 = 2;
+        }
+        if (result.startsWith('0')) {
+          score.team2 = 0;
+          score.team1 = 2;
         }
       }
     });
-    return check;
+    return score;
   }
 
 }
