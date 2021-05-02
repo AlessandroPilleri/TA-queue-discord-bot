@@ -10,8 +10,16 @@ class Match {
     this.team2 = [];
   }
 
+  getID() {
+    return this.id;
+  }
+
   isVoteClosed() {
     return this.voteClosed;
+  }
+
+  setVoteClosed() {
+    this.voteClosed = true;
   }
 
   getPlayers() {
@@ -53,7 +61,7 @@ class Match {
   }
 
   setTeams(team1, team2) {
-    if (isVoteClosed() == true) {
+    if (this.isVoteClosed() == true) {
       team1.forEach(e => {
         this.team1.push(e);
       });
@@ -82,4 +90,31 @@ class Match {
     });
   }
 
+  report(result, player) {
+    let check = 0;
+    this.team1.forEach(e => {
+      if (e.id == player.id) {
+        if (result == 'win') {
+          check = 1;
+        }
+        if (result == 'loss') {
+          check = 2;
+        }
+      }
+    });
+    this.team2.forEach(e => {
+      if (e.id == player.id) {
+        if (result == 'win') {
+          check = 2;
+        }
+        if (result == 'loss') {
+          check = 1;
+        }
+      }
+    });
+    return check;
+  }
+
 }
+
+module.exports = Match;

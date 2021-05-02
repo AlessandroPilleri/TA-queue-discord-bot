@@ -1,14 +1,14 @@
 class Queue {
 
   constructor(id, players_number) {
-    this.matchID = id;
+    this.queueID = id;
     this.players_number = players_number;
     this.players = [];
     this.isFull = false;
   }
 
-  getMatchID() {
-    return this.matchID;
+  getQueueID() {
+    return this.queueID;
   }
 
   getPlayers() {
@@ -27,10 +27,10 @@ class Queue {
     }
   }
 
-  removePlayerFromID(id) {
-    playerRemoved = false;
+  removePlayer(player) {
+    let playerRemoved = false;
     this.players.forEach((o) => {
-      if (o.getID() == id) {
+      if (o.id == player.id) {
         this.players.pop(o);
         playerRemoved = true;
       }
@@ -38,4 +38,12 @@ class Queue {
     return playerRemoved;
   }
 
+  isAlreadyInQueue(player) {
+    let alreadyInQueue = false;
+
+    return alreadyInQueue;
+  }
+
 }
+
+module.exports = Queue;
