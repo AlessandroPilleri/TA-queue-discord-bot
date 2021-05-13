@@ -5,7 +5,7 @@ const app = express();
 const Queue = require('./queue.js');
 const Match = require('./match.js');
 const Modality = require('./modality.js')
-require('dotenv').config();
+require('dotenv').config(); // not needed
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
