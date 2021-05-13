@@ -30,24 +30,24 @@ app.get('/', function (req, res) {
   if (req.query.m) {
     console.log(req.query.m);
     let mod = req.query.m;
-    res.sendFile(__dirname + '/' + mod + '.html');
+    res.sendFile(__dirname + '/pages/' + mod + '.html');
   }
 });
 
 app.get('/leaderboard-rl-1v1.json', function (req, res) {
-  res.sendFile(__dirname + '/leaderboard-rl-1v1.json');
+  res.sendFile(__dirname + '/leaderboards/leaderboard-rl-1v1.json');
 })
 app.get('/leaderboard-rl-2v2.json', function (req, res) {
-  res.sendFile(__dirname + '/leaderboard-rl-2v2.json');
+  res.sendFile(__dirname + '/leaderboards/leaderboard-rl-2v2.json');
 })
 app.get('/leaderboard-rl-3v3.json', function (req, res) {
-  res.sendFile(__dirname + '/leaderboard-rl-3v3.json');
+  res.sendFile(__dirname + '/leaderboards/leaderboard-rl-3v3.json');
 })
 app.get('/leaderboard-bh-1v1.json', function (req, res) {
-  res.sendFile(__dirname + '/leaderboard-bh-1v1.json');
+  res.sendFile(__dirname + '/leaderboards/leaderboard-bh-1v1.json');
 })
 app.get('/leaderboard-bh-2v2.json', function (req, res) {
-  res.sendFile(__dirname + '/leaderboard-bh-2v2.json');
+  res.sendFile(__dirname + '/leaderboards/leaderboard-bh-2v2.json');
 })
 
 // Bot callbacks
@@ -78,7 +78,7 @@ bot.on('message', msg => {
 
         case '.leaderboard':
           msg.channel.send({embed: {
-            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://ta-queue-discord-bot.herokuapp.com/?m=rl1v1'
           }});
           break;
 
@@ -117,7 +117,7 @@ bot.on('message', msg => {
 
         case '.leaderboard':
           msg.channel.send({embed: {
-            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://ta-queue-discord-bot.herokuapp.com/?m=rl2v2'
           }});
           break;
 
@@ -154,7 +154,7 @@ bot.on('message', msg => {
 
         case '.leaderboard':
           msg.channel.send({embed: {
-            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://ta-queue-discord-bot.herokuapp.com/?m=rl3v3'
           }});
           break;
 
@@ -185,7 +185,7 @@ bot.on('message', msg => {
 
         case '.leaderboard':
           msg.channel.send({embed: {
-            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://ta-queue-discord-bot.herokuapp.com/?m=bh1v1'
           }});
           break;
 
@@ -222,7 +222,7 @@ bot.on('message', msg => {
 
         case '.leaderboard':
           msg.channel.send({embed: {
-            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://leaderboard.tricolorarrows.it/rl1v1 (not working for now)'
+            description: msg.author + ', leaderboard for ' + msg.channel.name + ': https://ta-queue-discord-bot.herokuapp.com/?m=bh2v2'
           }});
           break;
 
