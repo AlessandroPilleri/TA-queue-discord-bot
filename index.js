@@ -9,6 +9,7 @@ const Modality = require('./modality.js')
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
+const port = process.env.PORT || 8080
 
 // Random generation function
 function getRandomInt(min, max) {
@@ -242,4 +243,6 @@ bot.on('message', msg => {
 
 // Starting bot and web server
 bot.login(TOKEN);
-app.listen(3000);
+app.listen(port, function () {
+  console.log("Webapp running.");
+});
