@@ -4,19 +4,13 @@ const express = require('express');
 const app = express();
 const Queue = require('./queue.js');
 const Match = require('./match.js');
-const Modality = require('./modality.js')
+const Modality = require('./modality.js');
+const FullQueue = require('./fullQueue.js');
 //require('dotenv').config(); // not needed
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 const port = process.env.PORT || 8080
-
-// Random generation function
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; // max escluso e min incluso
-}
 
 // Queues and Matches lists
 let rl1 = new Modality(2);
@@ -34,6 +28,7 @@ app.get('/', function (req, res) {
   }
 });
 
+// Send the JSON leaderboard file
 app.get('/leaderboard-rl-1v1.json', function (req, res) {
   res.sendFile(__dirname + '/leaderboards/leaderboard-rl-1v1.json');
 })
@@ -106,9 +101,11 @@ bot.on('message', msg => {
           break;
 
         case '.c':
+          rl2.c(msg, bot);
           break;
 
         case '.r':
+          rl2.r(msg);
           break;
 
         case '.clear':
@@ -242,7 +239,7 @@ bot.on('message', msg => {
 });
 
 // Starting bot and web server
-bot.login(TOKEN);
+bot.login('ODQ3NzY1NDg3ODE4ODk5NTA3.YLC1Iw.d85Ans3k4_jVqLCR6gNp6BSk15U');
 app.listen(port, function () {
   console.log("Webapp running.");
 });

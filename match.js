@@ -1,25 +1,16 @@
 class Match {
 
-  constructor(id, players) {
-    this.id = id;
-    this.players = players;
-    this.voteClosed = false;
-    this.r = 0;
-    this.c = 0;
-    this.team1 = [];
-    this.team2 = [];
+  constructor(id, players, team1, team2) {
+    this.id = id;           // unique match id
+    this.players = players; // number of players
+    this.team1 = [];        // list of first team players
+    this.team2 = [];        // list of second team players
+
+    this.setTeams(team1, team2);
   }
 
   getID() {
     return this.id;
-  }
-
-  isVoteClosed() {
-    return this.voteClosed;
-  }
-
-  setVoteClosed() {
-    this.voteClosed = true;
   }
 
   getPlayers() {
@@ -34,113 +25,14 @@ class Match {
     return this.team2;
   }
 
-  getR() {
-    return this.r;
-  }
-
-  getC() {
-    return this.c;
-  }
-
-  incR() {
-    if (this.isVoteClosed() == false) {
-      this.r++;
-      if (this.r + this.c == this.players.length) {
-        isVoteClosed = true;
-      }
-    }
-  }
-
-  incC() {
-    if (this.isVoteClosed() == false) {
-      this.c++;
-      if (this.r + this.c == this.players.length) {
-        isVoteClosed = true;
-      }
-    }
-  }
-
+  // Set player teams
   setTeams(team1, team2) {
-    if (this.isVoteClosed() == true) {
-      team1.forEach(e => {
-        this.team1.push(e);
-      });
-      team2.forEach(e => {
-        this.team2.push(e);
-      });
-    }
-  }
-
-  setRandomTeams() {
-    this.getPlayers().forEach(e => {
-      if (this.team1.length == 3) { // se il team1 ha già tre giocatori
-        this.team2.push(e);         // allora metto nel team2
-      } else {
-        if (this.team2.length == 3) { // se il team2 ha già tre giocatori
-          this.team1.push(e);         // allora metto nel team1
-        } else {
-          let t = getRandomInt(1, 3); // 1 o 2
-          if (t == 1) {
-            this.team1.push(e);
-          } else {
-            this.team2.push(e);
-          }
-        }
-      }
+    team1.forEach(e => {
+      this.team1.push(e);
     });
-  }
-
-  report(result, player) {
-    let score = {
-      check: 0,
-      team1: undefined,
-      team2: undefined
-    }
-    this.team1.forEach(e => {
-      if (e.id == player.id) {
-        score.check = 1;
-        if (result.startsWith('2')) {
-          score.team1 = 2;
-          if (result.endsWith('1')) {
-            score.team2 = 1;
-          }
-          if (result.endsWith('0')) {
-            score.team2 = 0;
-          }
-        }
-        if (result.startsWith('1')) {
-          score.team1 = 1;
-          score.team2 = 2;
-        }
-        if (result.startsWith('0')) {
-          score.team1 = 0;
-          score.team2 = 2;
-        }
-      }
+    team2.forEach(e => {
+      this.team2.push(e);
     });
-    this.team2.forEach(e => {
-      if (e.id == player.id) {
-        score.check = 2;
-        if (result.startsWith('2')) {
-          score.team2 = 2;
-          if (result.endsWith('1')) {
-            score.team1 = 1;
-          }
-          if (result.endsWith('0')) {
-            score.team1 = 0;
-          }
-        }
-        if (result.startsWith('1')) {
-          score.team2 = 1;
-          score.team1 = 2;
-        }
-        if (result.startsWith('0')) {
-          score.team2 = 0;
-          score.team1 = 2;
-        }
-      }
-    });
-    return score;
   }
 
 }
